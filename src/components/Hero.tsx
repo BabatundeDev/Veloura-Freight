@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useId, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -20,7 +20,6 @@ function TruckSvg() {
     >
       <defs>
         <linearGradient id={cab} x1="0" x2="1" y1="0" y2="1">
-          {/* <stop offset="0%" stopColor="#334155" /> */}
           <stop offset="100%" stopColor="#1e293b" />
         </linearGradient>
         <linearGradient id={trailer} x1="0" x2="0" y1="0" y2="1">
@@ -64,6 +63,18 @@ function TruckSvg() {
 }
 
 export function Hero() {
+  const [truckCount, setTruckCount] = useState(() =>
+    typeof window !== "undefined" && window.innerWidth < 768 ? 2 : TRUCK_COUNT
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setTruckCount(window.innerWidth < 768 ? 2 : TRUCK_COUNT);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-navy-950">
       {/* Background image layer */}
@@ -95,16 +106,15 @@ export function Hero() {
       />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(212,146,46,0.15),transparent)]" />
 
-      {/* Animated convoy: above dimming overlay, below hero copy (z-10) */}
+      {/* Animated convoy */}
       <div className="pointer-events-none absolute bottom-[22%] left-0 right-0 z-[5] h-32 md:bottom-[20%] md:h-36">
-
-        {Array.from({ length: TRUCK_COUNT }, (_, i) => (
+        {Array.from({ length: truckCount }, (_, i) => (
           <div
             key={i}
             className="absolute bottom-0 left-0 flex will-change-transform"
             style={{
               animation: `truck-drive ${TRUCK_LOOP_S}s linear infinite`,
-              animationDelay: `${-(i * TRUCK_LOOP_S) / TRUCK_COUNT}s`,
+              animationDelay: `${-(i * TRUCK_LOOP_S) / truckCount}s`,
             }}
           >
             <TruckSvg />
