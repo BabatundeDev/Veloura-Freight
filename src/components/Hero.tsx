@@ -41,8 +41,8 @@ function TruckSvg() {
         />
         <rect x="16" y="26" width="36" height="14" rx="2" fill="#0f172a" opacity="0.5" />
         <rect x="58" y="26" width="36" height="14" rx="2" fill="#0f172a" opacity="0.5" />
-        <text x="22" y="40" fill="#64748b" fontSize="10" fontWeight="600" fontFamily="system-ui">
-          PF
+        <text x="22" y="40" fill="#64748b" fontSize="8.5" fontWeight="600" fontFamily="system-ui">
+          VELOURA
         </text>
         <path
           d="M118 54V22h32l18 18v14h-14"
