@@ -162,5 +162,3 @@ The app uses React state in several interactive places:
 - Local storage is used for demo persistence in the quote and tracking flows.
 
 ## License
-
-This repository is currently private.
