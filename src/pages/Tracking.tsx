@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "../components/Reveal";
-import {
-  resolveTracking,
-  type ShipmentStage,
-  type TrackingResult,
-} from "../data/mockTracking";
+import { resolveTracking, type ShipmentStage, type TrackingResult } from "../data/mockTracking";
 
 const stageIndex: Record<ShipmentStage, number> = {
   received: 0,
@@ -14,13 +10,14 @@ const stageIndex: Record<ShipmentStage, number> = {
   delivered: 3,
 };
 
-function badgeClass(stage: ShipmentStage, active: ShipmentStage): string {
-  const done = stageIndex[stage] <= stageIndex[active];
-  if (!done) return "bg-slate-200 text-slate-500";
-  if (stage === "delivered" && active === "delivered")
-    return "bg-emerald-500/15 text-emerald-700 ring-1 ring-emerald-500/40";
-  if (stage === active) return "bg-gold-500/15 text-gold-800 ring-1 ring-gold-500/40";
-  return "bg-navy-900/10 text-navy-800";
+function getBadgeStyles(stage: ShipmentStage, active: ShipmentStage): string {
+  const isDone = stageIndex[stage] <= stageIndex[active];
+  if (!isDone) return "bg-slate-100 text-slate-400 border border-slate-200";
+  if (stage === "delivered" && active === "delivered") {
+    return "bg-emerald-50 text-emerald-700 border border-emerald-200/60 font-bold";
+  }
+  if (stage === active) return "bg-gold-500/10 text-gold-700 border border-gold-500/30 font-bold";
+  return "bg-slate-100 text-slate-700 border border-slate-200 font-medium";
 }
 
 export function Tracking() {
@@ -45,25 +42,23 @@ export function Tracking() {
     }, 450);
   }
 
-  const progress = result
-    ? ((stageIndex[result.currentStage] + 1) / 4) * 100
-    : 0;
+  const progress = result ? ((stageIndex[result.currentStage] + 1) / 4) * 100 : 0;
 
   return (
-    <div className="min-h-[80vh] bg-slate-50">
+    <div className="min-h-screen bg-slate-50">
       <div className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 lg:px-8">
           <Reveal>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-600">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold-600">
               Enterprise tracking
             </p>
-            <h1 className="mt-3 text-4xl font-bold tracking-tight text-navy-900 md:text-5xl">
+            <h1 className="mt-3 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
               Shipment tracking
             </h1>
             <p className="mt-4 max-w-2xl text-slate-600">
               Enter your Veloura Freight tracking ID to view milestones. Demo IDs:{" "}
-              <span className="font-mono text-navy-800">PF2026001</span>–
-              <span className="font-mono text-navy-800">PF2026004</span>.
+              <span className="font-mono font-bold text-slate-800">PF2026001</span>–
+              <span className="font-mono font-bold text-slate-800">PF2026004</span>.
             </p>
           </Reveal>
 
@@ -74,12 +69,12 @@ export function Tracking() {
                 value={id}
                 onChange={(e) => setId(e.target.value)}
                 placeholder="Tracking ID"
-                className="min-h-[52px] flex-1 rounded-xl border border-slate-200 bg-white px-5 text-navy-900 outline-none ring-gold-500/20 transition focus:border-gold-500 focus:ring-2"
+                className="min-h-[52px] flex-1 rounded-xl border border-slate-200 bg-white px-5 text-slate-900 outline-none ring-gold-500/20 transition focus:border-gold-500 focus:ring-2"
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="min-h-[52px] rounded-xl bg-navy-900 px-8 text-sm font-semibold text-white transition hover:bg-navy-800 disabled:opacity-60"
+                className="min-h-[52px] rounded-xl bg-slate-950 px-8 text-sm font-bold text-white transition hover:bg-slate-800 disabled:opacity-60"
               >
                 {loading ? "Searching…" : "Track"}
               </button>
@@ -92,7 +87,7 @@ export function Tracking() {
                 initial={{ opacity: 0, y: -6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="mt-4 text-sm font-medium text-red-600"
+                className="mt-4 text-sm font-semibold text-red-600"
               >
                 {error}
               </motion.p>
@@ -110,27 +105,22 @@ export function Tracking() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl shadow-navy-900/5"
+              className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
             >
               <div className="border-b border-slate-100 bg-slate-50/80 px-6 py-5 md:px-8">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
                       Shipment
                     </p>
-                    <p className="mt-1 font-mono text-lg font-semibold text-navy-900">{result.id}</p>
+                    <p className="mt-1 font-mono text-lg font-bold text-slate-900">{result.id}</p>
                   </div>
-                  <span
-                    className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wide ${badgeClass(
-                      result.currentStage,
-                      result.currentStage
-                    )}`}
-                  >
+                  <span className={`rounded-full px-4 py-1.5 text-xs uppercase tracking-wide ${getBadgeStyles(result.currentStage, result.currentStage)}`}>
                     {result.stages.find((s) => s.key === result.currentStage)?.label ?? "Status"}
                   </span>
                 </div>
                 <div className="mt-6">
-                  <div className="mb-2 flex justify-between text-xs font-medium text-slate-500">
+                  <div className="mb-2 flex justify-between text-xs font-semibold text-slate-500">
                     <span>Progress</span>
                     <span>{Math.round(progress)}%</span>
                   </div>
@@ -151,37 +141,22 @@ export function Tracking() {
                     <li key={stage.key} className="relative flex gap-5 pb-12 last:pb-0">
                       {i < result.stages.length - 1 && (
                         <div
-                          className={`absolute left-[19px] top-10 h-[calc(100%-0.5rem)] w-0.5 ${
-                            stage.completed ? "bg-navy-900/80" : "bg-slate-200"
-                          }`}
+                          className={`absolute left-[19px] top-10 h-[calc(100%-0.5rem)] w-0.5 ${stage.completed ? "bg-slate-900" : "bg-slate-200"}`}
                           aria-hidden
                         />
                       )}
-                      <div
-                        className={`relative z-[1] flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold ${
-                          stage.completed ? "bg-navy-900 text-white" : "bg-slate-200 text-slate-500"
-                        }`}
-                      >
+                      <div className={`relative z-[1] flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold ${stage.completed ? "bg-slate-900 text-white" : "bg-slate-200 text-slate-400"}`}>
                         {i + 1}
                       </div>
                       <div className="min-w-0 flex-1 pt-0.5">
                         <div className="flex flex-wrap items-center gap-2">
-                          <h3 className="text-lg font-semibold text-navy-900">{stage.label}</h3>
-                          <span
-                            className={`rounded-md px-2 py-0.5 text-[10px] font-bold uppercase ${badgeClass(
-                              stage.key,
-                              result.currentStage
-                            )}`}
-                          >
-                            {stage.completed
-                              ? stage.key === result.currentStage
-                                ? "Current"
-                                : "Done"
-                              : "Pending"}
+                          <h3 className="text-lg font-bold text-slate-900">{stage.label}</h3>
+                          <span className={`rounded-md px-2 py-0.5 text-[10px] uppercase ${getBadgeStyles(stage.key, result.currentStage)}`}>
+                            {stage.completed ? (stage.key === result.currentStage ? "Current" : "Done") : "Pending"}
                           </span>
                         </div>
                         {stage.timestamp && (
-                          <p className="mt-1 text-sm text-slate-500">{stage.timestamp}</p>
+                          <p className="mt-1 text-sm font-medium text-slate-500">{stage.timestamp}</p>
                         )}
                       </div>
                     </li>
@@ -194,8 +169,8 @@ export function Tracking() {
 
         {!result && !loading && (
           <Reveal>
-            <div className="rounded-2xl border border-dashed border-slate-300 bg-white/50 p-12 text-center text-slate-500">
-              Enter a tracking ID above to load the timeline and progress view.
+            <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-12 text-center font-medium text-slate-400">
+              Enter a tracking ID above to log your manifest telemetry.
             </div>
           </Reveal>
         )}

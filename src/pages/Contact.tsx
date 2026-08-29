@@ -9,10 +9,10 @@ const address = "1200 Harbor Exchange, Floor 18, New York, NY 10004";
 export function Contact() {
   return (
     <div className="bg-slate-50">
-      <div className="border-b border-slate-200 bg-gradient-to-br from-navy-900 to-navy-950 py-16 md:py-20">
+      <div className="border-b border-slate-200 bg-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <Reveal>
-            <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl">Contact</h1>
+            <h1 className="text-4xl font-bold tracking-tight text-black md:text-5xl">Contact</h1>
             <p className="mt-4 max-w-2xl text-slate-400">
               Speak with our enterprise desk — routing, compliance, and account coverage worldwide.
             </p>

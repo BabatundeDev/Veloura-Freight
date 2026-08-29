@@ -9,15 +9,14 @@ const regions = [
 
 export function GlobalMap() {
   return (
-    <section className="relative overflow-hidden bg-slate-100 py-20 md:py-28">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(212,146,46,0.06),transparent_50%)]" />
+    <section className="relative overflow-hidden bg-white py-20 md:py-28">
       <div className="relative mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <Reveal>
           <div className="mb-12 max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-600">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold-600">
               Global network
             </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-navy-900 md:text-4xl">
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
               We deliver to 100+ countries worldwide
             </h2>
             <p className="mt-4 text-slate-600">
@@ -28,19 +27,21 @@ export function GlobalMap() {
 
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <Reveal delay={0.1}>
-            <div className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-navy-950 shadow-xl shadow-navy-900/20 md:rounded-2xl">
+            {/* Cleaned card background to match the white/light theme setup */}
+            <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-sm md:rounded-2xl">
               <img
-                src="/globe-network.png"
+                src="/globe.jpg"
                 alt="Digital globe showing global logistics connectivity"
-                className="h-auto w-full max-h-[min(420px,55vh)] object-cover object-center md:max-h-[min(480px,50vh)]"
+                className="h-auto w-full max-h-[min(420px,55vh)] object-cover object-center md:max-h-[min(480px,50vh)] mix-blend-multiply"
                 loading="lazy"
                 decoding="async"
               />
-              <ul className="flex flex-wrap gap-2 border-t border-white/10 bg-navy-950/95 px-4 py-4 md:gap-3 md:px-5 md:py-4">
+              {/* Region container changed to soft light gray instead of thick navy background */}
+              <ul className="flex flex-wrap gap-2 border-t border-slate-200 bg-slate-50 px-4 py-4 md:gap-3 md:px-5 md:py-4">
                 {regions.map((r) => (
                   <li
                     key={r.id}
-                    className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-slate-200 backdrop-blur-sm"
+                    className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm"
                   >
                     {r.label}
                   </li>
@@ -58,12 +59,12 @@ export function GlobalMap() {
               ].map((text) => (
                 <li
                   key={text}
-                  className="flex gap-4 rounded-xl border border-slate-200/80 bg-white p-5 shadow-sm transition hover:border-gold-500/40 hover:shadow-md"
+                  className="flex gap-4 rounded-xl border border-slate-200 bg-slate-50/50 p-5 transition hover:border-gold-500/40 hover:bg-white hover:shadow-md"
                 >
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold-500/15 text-gold-600">
+                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold-500/10 text-gold-700 font-bold">
                     ✓
                   </span>
-                  <span className="text-slate-700">{text}</span>
+                  <span className="font-medium text-slate-700">{text}</span>
                 </li>
               ))}
             </ul>

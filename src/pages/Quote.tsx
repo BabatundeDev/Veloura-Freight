@@ -39,12 +39,13 @@ export function Quote() {
   }
 
   return (
-    <div className="min-h-[80vh] bg-slate-50">
-      <div className="border-b border-slate-200 bg-gradient-to-br from-navy-900 to-navy-950 py-16 md:py-20">
+    <div className="min-h-screen bg-slate-50">
+      {/* Header section updated to bright aesthetic theme */}
+      <div className="border-b border-slate-200 bg-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <Reveal>
-            <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl">Request a quote</h1>
-            <p className="mt-4 max-w-2xl text-slate-400">
+            <h1 className="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">Request a quote</h1>
+            <p className="mt-4 max-w-2xl text-slate-600">
               Corporate-grade intake — we respond with lane options, transit ranges, and next steps within one business day.
             </p>
           </Reveal>
@@ -59,10 +60,10 @@ export function Quote() {
                 key="thanks"
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="rounded-2xl border border-emerald-500/30 bg-emerald-50 p-10 text-center"
+                className="rounded-2xl border border-emerald-200 bg-emerald-50 p-10 text-center"
               >
-                <p className="text-lg font-semibold text-emerald-900">Quote request received</p>
-                <p className="mt-2 text-emerald-800/90">
+                <p className="text-lg font-bold text-emerald-900">Quote request received</p>
+                <p className="mt-2 text-emerald-800">
                   Our operations desk will contact you shortly using the details provided.
                 </p>
               </motion.div>
@@ -70,41 +71,41 @@ export function Quote() {
               <motion.form
                 key="form"
                 onSubmit={handleSubmit}
-                className="space-y-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-navy-900/5 md:p-10"
+                className="space-y-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-10"
               >
                 <div className="grid gap-6 md:grid-cols-2">
-                  <label className="block text-sm font-medium text-navy-800">
+                  <label className="block text-sm font-semibold text-slate-800">
                     Full name
                     <input
                       required
                       value={form.fullName}
                       onChange={(e) => update("fullName", e.target.value)}
-                      className="mt-2 w-full rounded-lg border border-slate-200 px-4 py-3 outline-none transition focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
+                      className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
                     />
                   </label>
-                  <label className="block text-sm font-medium text-navy-800">
+                  <label className="block text-sm font-semibold text-slate-800">
                     Company name
                     <input
                       required
                       value={form.company}
                       onChange={(e) => update("company", e.target.value)}
-                      className="mt-2 w-full rounded-lg border border-slate-200 px-4 py-3 outline-none transition focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
+                      className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
                     />
                   </label>
                 </div>
 
-                <label className="block text-sm font-medium text-navy-800">
+                <label className="block text-sm font-semibold text-slate-800">
                   Cargo type
                   <input
                     required
                     placeholder="e.g. electronics, machinery, perishables"
                     value={form.cargoType}
                     onChange={(e) => update("cargoType", e.target.value)}
-                    className="mt-2 w-full rounded-lg border border-slate-200 px-4 py-3 outline-none transition focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
+                    className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25 placeholders:text-slate-400"
                   />
                 </label>
 
-                <label className="block text-sm font-medium text-navy-800">
+                <label className="block text-sm font-semibold text-slate-800">
                   Weight (kg)
                   <input
                     required
@@ -112,33 +113,33 @@ export function Quote() {
                     min={1}
                     value={form.weight}
                     onChange={(e) => update("weight", e.target.value)}
-                    className="mt-2 w-full rounded-lg border border-slate-200 px-4 py-3 outline-none transition focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
+                    className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
                   />
                 </label>
 
                 <div className="grid gap-6 md:grid-cols-2">
-                  <label className="block text-sm font-medium text-navy-800">
+                  <label className="block text-sm font-semibold text-slate-800">
                     Origin
                     <input
                       required
                       value={form.origin}
                       onChange={(e) => update("origin", e.target.value)}
-                      className="mt-2 w-full rounded-lg border border-slate-200 px-4 py-3 outline-none transition focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
+                      className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
                     />
                   </label>
-                  <label className="block text-sm font-medium text-navy-800">
+                  <label className="block text-sm font-semibold text-slate-800">
                     Destination
                     <input
                       required
                       value={form.destination}
                       onChange={(e) => update("destination", e.target.value)}
-                      className="mt-2 w-full rounded-lg border border-slate-200 px-4 py-3 outline-none transition focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
+                      className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25"
                     />
                   </label>
                 </div>
 
                 <fieldset>
-                  <legend className="text-sm font-medium text-navy-800">Delivery type</legend>
+                  <legend className="text-sm font-semibold text-slate-800">Delivery type</legend>
                   <div className="mt-3 grid grid-cols-3 gap-3">
                     {(
                       [
@@ -151,11 +152,10 @@ export function Quote() {
                         key={v}
                         type="button"
                         onClick={() => update("deliveryType", v)}
-                        className={`rounded-lg border px-3 py-3 text-sm font-semibold transition ${
-                          form.deliveryType === v
-                            ? "border-gold-500 bg-gold-500/10 text-navy-900"
+                        className={`rounded-lg border px-3 py-3 text-sm font-bold transition ${form.deliveryType === v
+                            ? "border-gold-600 bg-gold-500/10 text-gold-700"
                             : "border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300"
-                        }`}
+                          }`}
                       >
                         {label}
                       </button>
@@ -163,10 +163,11 @@ export function Quote() {
                   </div>
                 </fieldset>
 
+                {/* Submit button converted to matching light-theme branding layout */}
                 <button
                   type="submit"
                   disabled={loading}
-                  className="relative flex w-full items-center justify-center overflow-hidden rounded-lg bg-navy-900 py-4 text-sm font-semibold text-white transition hover:bg-navy-800 disabled:cursor-not-allowed disabled:opacity-70"
+                  className="relative flex w-full items-center justify-center overflow-hidden rounded-xl bg-slate-950 py-4 text-sm font-bold text-white shadow-sm transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   <span className={loading ? "opacity-0" : ""}>Submit request</span>
                   {loading && (
@@ -179,6 +180,7 @@ export function Quote() {
                     </motion.span>
                   )}
                 </button>
+
               </motion.form>
             )}
           </AnimatePresence>

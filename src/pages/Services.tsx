@@ -70,13 +70,13 @@ const sections = [
 export function Services() {
   return (
     <div className="bg-slate-50">
-      <div className="border-b border-slate-200 bg-gradient-to-br from-navy-900 to-navy-950 py-20 md:py-24">
+      <div className="border-b border-slate-200 bg-gradient-to-br bg-white py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <Reveal>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-400">
               Services
             </p>
-            <h1 className="mt-3 text-4xl font-bold tracking-tight text-white md:text-5xl">
+            <h1 className="mt-3 text-4xl font-bold tracking-tight text-black md:text-5xl">
               Structured for enterprise freight
             </h1>
             <p className="mt-4 max-w-2xl text-lg text-slate-400">

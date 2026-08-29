@@ -31,10 +31,10 @@ export function FreightCalculator() {
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <Reveal>
           <div className="mb-10 max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-600">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold-600">
               Estimator
             </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-navy-900 md:text-4xl">
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
               Freight cost calculator
             </h2>
             <p className="mt-4 text-slate-600">
@@ -46,7 +46,7 @@ export function FreightCalculator() {
         <div className="grid gap-10 lg:grid-cols-2">
           <Reveal delay={0.05}>
             <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-6 md:p-8">
-              <label className="block text-sm font-medium text-navy-800">
+              <label className="block text-sm font-semibold text-slate-800">
                 Weight (kg)
                 <input
                   type="number"
@@ -54,12 +54,12 @@ export function FreightCalculator() {
                   step={1}
                   value={weight}
                   onChange={(e) => setWeight(e.target.value)}
-                  className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-navy-900 outline-none ring-gold-500/30 transition focus:border-gold-500 focus:ring-2"
+                  className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none ring-gold-500/30 transition focus:border-gold-500 focus:ring-2"
                 />
               </label>
 
               <fieldset className="mt-6">
-                <legend className="text-sm font-medium text-navy-800">Shipping type</legend>
+                <legend className="text-sm font-semibold text-slate-800">Shipping type</legend>
                 <div className="mt-2 grid grid-cols-3 gap-2">
                   {(
                     [
@@ -72,9 +72,9 @@ export function FreightCalculator() {
                       key={key}
                       type="button"
                       onClick={() => setMode(key)}
-                      className={`rounded-lg border px-3 py-2.5 text-sm font-semibold transition ${
+                      className={`rounded-lg border px-3 py-2.5 text-sm font-bold transition ${
                         mode === key
-                          ? "border-gold-500 bg-gold-500/15 text-navy-900"
+                          ? "border-gold-600 bg-gold-500/10 text-gold-700"
                           : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
                       }`}
                     >
@@ -84,7 +84,7 @@ export function FreightCalculator() {
                 </div>
               </fieldset>
 
-              <label className="mt-6 block text-sm font-medium text-navy-800">
+              <label className="mt-6 block text-sm font-semibold text-slate-800">
                 Distance (km)
                 <input
                   type="number"
@@ -92,15 +92,16 @@ export function FreightCalculator() {
                   step={50}
                   value={distance}
                   onChange={(e) => setDistance(e.target.value)}
-                  className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-navy-900 outline-none ring-gold-500/30 transition focus:border-gold-500 focus:ring-2"
+                  className="mt-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none ring-gold-500/30 transition focus:border-gold-500 focus:ring-2"
                 />
               </label>
             </div>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="flex h-full min-h-[280px] flex-col justify-center rounded-2xl border border-navy-800 bg-gradient-to-br from-navy-900 to-navy-950 p-8 text-white shadow-2xl">
-              <p className="text-sm font-medium uppercase tracking-wider text-gold-400">
+            {/* Shifted from dark navy to a clean light theme layout panel with high-contrast text */}
+            <div className="flex h-full min-h-[280px] flex-col justify-center rounded-2xl border border-slate-200 bg-slate-50/50 p-8 shadow-sm">
+              <p className="text-xs font-bold uppercase tracking-wider text-gold-600">
                 Estimated shipping cost
               </p>
               <AnimatePresence mode="wait">
@@ -112,13 +113,13 @@ export function FreightCalculator() {
                   transition={{ duration: 0.35 }}
                   className="mt-4"
                 >
-                  <span className="text-5xl font-bold tracking-tight md:text-6xl">
+                  <span className="text-5xl font-bold tracking-tight text-slate-900 md:text-6xl">
                     ${cost.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                   </span>
-                  <span className="ml-2 text-lg text-slate-400">USD</span>
+                  <span className="ml-2 text-lg font-bold text-slate-400">USD</span>
                 </motion.div>
               </AnimatePresence>
-              <p className="mt-6 text-sm leading-relaxed text-slate-400">
+              <p className="mt-6 text-sm leading-relaxed text-slate-600">
                 Model uses lane averages for {mode} freight. Dense cargo, hazardous goods, and peak season may adjust pricing.
               </p>
             </div>
