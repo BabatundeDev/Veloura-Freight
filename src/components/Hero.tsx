@@ -74,18 +74,10 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-slate-900">
-      {/* Background image layer */}
-      <div
-        className="absolute inset-0 opacity-100"
-        style={{
-          backgroundImage: `url(${truckBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat"
-        }}
-      />
-
+    <section
+      className="relative min-h-[100svh] overflow-hidden bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url("${truckBg}")` }}
+    >
       {/* Animated Convoy Track Layer */}
       <div className="pointer-events-none absolute bottom-[22%] left-0 right-0 z-[5] h-32 md:bottom-[20%] md:h-36">
         {Array.from({ length: truckCount }, (_, i) => (
